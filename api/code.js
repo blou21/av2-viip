@@ -5,7 +5,6 @@ let fetchFn;
 try {
   fetchFn = fetch; // Node 18+ sudah ada global fetch
 } catch {
-  fetchFn = require("node-fetch"); // fallback Node <18
 }
 const fetch = fetchFn;
 
