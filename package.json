@@ -1,0 +1,10 @@
+{
+  "name": "vercel-telegram-bot",
+  "version": "1.0.0",
+  "description": "Vercel function for telegram API",
+  "main": "api/code.js",
+  "dependencies": {
+    "node-fetch": "^2.6.1"  
+    // Gunakan versi 2.6.1 atau versi yang stabil jika versi baru bermasalah
+  }
+}
