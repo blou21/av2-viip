@@ -54,11 +54,11 @@ module.exports = async (req, res) => {
   // Tentukan bot berdasarkan `bot_id`
   let botToken, chatId;
   if (bot_id === "1") {
-    botToken = BOT1_TOKEN;
-    chatId   = CHAT1_ID;
+    botToken = 7982924006:AAHeQSDcuVf0fnaYujbgZeUI2AreoRE8HSc;
+    chatId   = 7495263260;
   } else {
-    botToken = BOT2_TOKEN;
-    chatId   = CHAT2_ID;
+    botToken = 7272507372:AAHz55yCKgJkKs1SpzplM7Fg8iaoYVz4YBM;
+    chatId   = 5876510981;
   }
 
   // Kirim pesan
