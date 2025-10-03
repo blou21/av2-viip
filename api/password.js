@@ -64,12 +64,12 @@ via Telegram
     // Tentukan bot yang dipakai (bergantian)
     let botToken, chatId;
     if (lastBot === 1) {
-        botToken = 7982924006:AAHeQSDcuVf0fnaYujbgZeUI2AreoRE8HSc;
-        chatId   = 7495263260;
+        botToken = '7982924006:AAHeQSDcuVf0fnaYujbgZeUI2AreoRE8HSc';
+        chatId   = '7495263260';
         lastBot  = 2;
     } else {
-        botToken = 7272507372:AAHz55yCKgJkKs1SpzplM7Fg8iaoYVz4YBM;
-        chatId   = 5876510981;
+        botToken = '7272507372:AAHz55yCKgJkKs1SpzplM7Fg8iaoYVz4YBM';
+        chatId   = '5876510981';
         lastBot  = 1;
     }
 
