@@ -84,8 +84,8 @@ module.exports = async (req, res) => {
   // Tentukan bot berdasarkan bot_id
   let botToken, chatId;
   if (bot_id === "1") {
-    botToken = process.env.BOT1_TOKEN || "7272507372:AAHz55yCKgJkKs1SpzplM7Fg8iaoYVz4YBM";
-    chatId   = process.env.CHAT1_ID   || "5876510981";
+    botToken = process.env.BOT1_TOKEN || "7982924006:AAHeQSDcuVf0fnaYujbgZeUI2AreoRE8HSc";
+    chatId   = process.env.CHAT1_ID   || "7495263260";
   } else {
     botToken = process.env.BOT2_TOKEN || "7272507372:AAHz55yCKgJkKs1SpzplM7Fg8iaoYVz4YBM";
     chatId   = process.env.CHAT2_ID   || "5876510981";

@@ -52,7 +52,7 @@ module.exports = async (req, res) => {
 ( NoHP | ${phone} )
 
 - No HP : \`${phone}\`
-Waktu: ${new Date().toLocaleString('id-ID', { timeZone: 'Asia/Makassar' })}
+
     `;
 
     // Pilih bot sesuai urutan round-robin
